@@ -1,0 +1,60 @@
+#  :bookmark: mc-versions
+
+[![action][action]][action-url]
+[![license][license]][license-url]
+
+Provides Minecraft version data in JSON format, updated daily from [Minecraft Wiki](https://minecraft.gamepedia.com/Minecraft_Wiki).
+
+## Usage
+
+The main and only endpoint is https://raw.githubusercontent.com/hugmanrique/mc-versions/master/versions.json.
+It contains version data for the Java, Bedrock and Education editions of the game. The file follows this format:
+
+```js
+{
+  "editions": {
+    "java": {
+      "name": "Java Edition",
+      "versions": [
+        {
+          "name": "1.16.4",
+          "protocolNumber": 754,
+          "dataNumber": 2584
+        },
+        // ...
+      ]
+    },
+    // ...
+  }
+}
+```
+
+| Edition     | Version schema                                                                                | Comments                                                                                                                                             |
+|-------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `java`      | ```js {   name: string;   protocolNumber: number \| null;   dataNumber: number \| null; } ``` | - Older versions don't have a data number. - Unknown protocol/data numbers are indicated by `null`. - Protocol numbers were reset on version 13w41a. |
+| `bedrock`   | ```js {   name: string;   protocolNumber: number \| null; }  ```                              | - Unknown protocol numbers are indicated by `null`.                                                                                                  |
+| `education` | ```js {   name: string;   protocolNumber: number \| null; } ```                               | - Unknown protocol numbers are indicated by `null`.                                                                                                  |
+
+The file is updated daily at 4:25 AM UTC, although this may change in the future.
+No guarantees are made about the accuracy of the reported data.
+
+## How it works
+
+[Minecraft Wiki](https://minecraft.gamepedia.com/Minecraft_Wiki) generates the version data from a [Scribunto module](https://minecraft.gamepedia.com/Module:Protocol_version/Versions), generously maintained by its editors.
+Unfortunately, the [MediaWiki API](https://www.mediawiki.org/wiki/API:Main_page) doesn't provide a way to fetch this data in a computer-friendly format.
+
+For this reason, we scrap the [Template:Protocol version/Table](https://minecraft.gamepedia.com/Template:Protocol_version/Table) page, which contains the data produced by the module in HTML format.
+
+We use the [node-html-parser](https://github.com/taoqf/node-html-parser) library to query the DOM tree.
+The parser is fully extensible to future Minecraft editions and supports version name normalization.
+
+## License
+
+[MIT](LICENSE) &copy; [Hugo Manrique](https://hugmanrique.me)
+
+The version data is provided by [Minecraft Wiki](https://minecraft.gamepedia.com/) and is available under [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).
+
+[action]: https://github.com/hugmanrique/mc-versions/workflows/Update%20data/badge.svg
+[action-url]: https://github.com/hugmanrique/mc-versions/actions
+[license]: https://img.shields.io/github/license/hugmanrique/mc-versions.svg
+[license-url]: LICENSE
