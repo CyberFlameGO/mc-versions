@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-        fetch-depth: 0 # needed for commiting
     - uses: actions/setup-node@v1
       with:
         node-version: 14.x
