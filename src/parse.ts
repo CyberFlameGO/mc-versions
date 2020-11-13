@@ -50,7 +50,6 @@ function parseVersionNumber(value: string): number | null {
 
   const number = parseInt(value);
   if (isNaN(number)) {
-    console.log(`"${value}"`);
     throw new Error(`Cannot parse version number ${value}`);
   }
   return number;
