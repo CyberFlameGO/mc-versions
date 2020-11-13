@@ -1,0 +1,31 @@
+name: Update data
+
+on:
+  schedule:
+    # Run at 4:25 AM UTC daily
+    - cron: '25 4 * * *'
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+        fetch-depth: 0 # needed for commiting
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: Create JSON file
+      run: yarn run create # overwrites previous file
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "mc-versions@hugmanrique.me"
+        git config --local user.name "mc-versions"
+        git add versions.json
+        git diff-index --quiet HEAD || git commit -m 'Update data'
+        git push
+

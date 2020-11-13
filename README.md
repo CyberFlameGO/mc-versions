@@ -55,7 +55,7 @@ Unknown/non-existent protocol/data numbers are indicated with `null`.
 </td>
     <td>
       <ul>
-        <li>Versions previous to 15w32a don't have a data number.</li>
+        <li>Previous versions to 15w32a don't have a data number.</li>
         <li>Protocol numbers were reset on version 13w41a.</li>
       </ul>
     </td>

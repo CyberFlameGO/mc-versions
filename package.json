@@ -16,6 +16,10 @@
     "build": "tsc",
     "create": "node dist/create.js"
   },
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "node-html-parser": "^1.4.8"
+  },
   "devDependencies": {
     "@hugmanrique/eslint-config": "^1.1.10",
     "@tsconfig/node14": "^1.0.0",
@@ -24,9 +28,5 @@
     "eslint": "^7.12.1",
     "prettier": "^2.1.2",
     "typescript": "^4.0.5"
-  },
-  "dependencies": {
-    "node-fetch": "^2.6.1",
-    "node-html-parser": "^1.4.8"
   }
 }
