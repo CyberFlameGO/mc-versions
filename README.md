@@ -7,7 +7,7 @@ Provides Minecraft version data in JSON format, updated daily from [Minecraft Wi
 
 ## Usage
 
-The main and only endpoint is [api-url].
+The main and only endpoint is https://raw.githubusercontent.com/hugmanrique/mc-versions/main/versions.json.
 It contains version data for the Java, Bedrock and Education editions of the game. The file follows this format:
 
 ```js
@@ -108,7 +108,6 @@ The parser is fully extensible to future Minecraft editions and supports version
 
 The version data is provided by [Minecraft Wiki](https://minecraft.gamepedia.com/) and is available under [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).
 
-[api-url]: https://raw.githubusercontent.com/hugmanrique/mc-versions/main/versions.json
 [action]: https://github.com/hugmanrique/mc-versions/workflows/Update%20data/badge.svg
 [action-url]: https://github.com/hugmanrique/mc-versions/actions
 [license]: https://img.shields.io/github/license/hugmanrique/mc-versions.svg
