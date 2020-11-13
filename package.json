@@ -1,6 +1,7 @@
 {
   "name": "@hugmanrique/mc-versions",
   "version": "1.0.0",
+  "private": true,
   "description": "Provides Minecraft version data in JSON format",
   "license": "MIT",
   "repository": {
