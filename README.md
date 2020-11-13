@@ -29,11 +29,65 @@ It contains version data for the Java, Bedrock and Education editions of the gam
 }
 ```
 
-| Edition     | Version schema                                                                                | Comments                                                                                                                                             |
-|-------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `java`      | ```js {   name: string;   protocolNumber: number \| null;   dataNumber: number \| null; } ``` | - Older versions don't have a data number. - Unknown protocol/data numbers are indicated by `null`. - Protocol numbers were reset on version 13w41a. |
-| `bedrock`   | ```js {   name: string;   protocolNumber: number \| null; }  ```                              | - Unknown protocol numbers are indicated by `null`.                                                                                                  |
-| `education` | ```js {   name: string;   protocolNumber: number \| null; } ```                               | - Unknown protocol numbers are indicated by `null`.                                                                                                  |
+Unknown/non-existent protocol/data numbers are indicated with `null`.
+
+<table>
+<thead>
+  <tr>
+    <th>Edition</th>
+    <th>Version schema</th>
+    <th>Comments</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><code>java</code></td>
+<td>
+
+```ts
+{
+  name: string;
+  protocolNumber: number | null;
+  dataNumber: number | null;
+}
+```
+
+</td>
+    <td>
+      <ul>
+        <li>Versions previous to 15w32a don't have a data number.</li>
+        <li>Protocol numbers were reset on version 13w41a.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code>bedrock</code></td>
+<td>
+
+```ts
+{
+  name: string;
+  protocolNumber: number | null;
+}
+```
+
+</td>
+  </tr>
+  <tr>
+    <td><code>education</code></td>
+<td>
+
+```ts
+{
+  name: string;
+  protocolNumber: number | null;
+}
+```
+
+</td>
+  </tr>
+</tbody>
+</table>
 
 The file is updated daily at 4:25 AM UTC, although this may change in the future.
 No guarantees are made about the accuracy of the reported data.
