@@ -71,7 +71,7 @@ Unknown/non-existent protocol/data numbers are indicated with `null`.
 }
 ```
 
-</td>
+</td><td></td>
   </tr>
   <tr>
     <td><code>education</code></td>
@@ -84,7 +84,7 @@ Unknown/non-existent protocol/data numbers are indicated with `null`.
 }
 ```
 
-</td>
+</td><td></td>
   </tr>
 </tbody>
 </table>
