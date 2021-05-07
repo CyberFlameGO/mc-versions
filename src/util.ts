@@ -1,3 +1,4 @@
+import { promises as fs } from 'fs';
 import { HTMLElement } from 'node-html-parser';
 
 // DOM
@@ -83,7 +84,7 @@ export function resolveTableSpans(table: HTMLElement) {
   }
 }
 
-// Maps & Sets
+// Maps
 
 export function pushToMapValue<K, V>(
   map: Map<K, V[]>,
@@ -96,4 +97,17 @@ export function pushToMapValue<K, V>(
   } else {
     map.set(key, newElements);
   }
+}
+
+// JSON files
+
+export async function readJsonFile(filePath: string) {
+  const contents = await fs.readFile(filePath, 'utf8');
+  return JSON.parse(contents);
+}
+
+export async function writeJsonFile(filePath: string, contents: unknown) {
+  // A line is terminated by a newline character on POSIX-compliant systems.
+  const toWrite = `${JSON.stringify(contents)}\n`;
+  await fs.writeFile(filePath, toWrite, 'utf8');
 }

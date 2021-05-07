@@ -1,19 +1,7 @@
-import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
 
+import { readJsonFile, writeJsonFile } from './util';
 import { Edition, Version, parsePage } from './parse';
-
-// Utilities
-
-async function readJsonFile(filePath: string) {
-  const contents = await fs.readFile(filePath, 'utf8');
-  return JSON.parse(contents);
-}
-
-async function writeJsonFile(filePath: string, contents: unknown) {
-  const toWrite = JSON.stringify(contents);
-  await fs.writeFile(filePath, toWrite, 'utf8');
-}
 
 // Fetching
 
