@@ -22,7 +22,7 @@
     "node-html-parser": "^3.2.0"
   },
   "devDependencies": {
-    "@hugmanrique/eslint-config": "^1.1.10",
+    "@hugmanrique/eslint-config": "^2.0.1",
     "@tsconfig/node14": "^1.0.0",
     "@types/node": "^15.0.2",
     "@types/node-fetch": "^2.5.10",
