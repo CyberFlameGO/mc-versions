@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pushToMapValue = exports.resolveTableSpans = void 0;
+exports.writeJsonFile = exports.readJsonFile = exports.pushToMapValue = exports.resolveTableSpans = void 0;
+const fs_1 = require("fs");
 const node_html_parser_1 = require("node-html-parser");
 // DOM
 /**
@@ -67,7 +68,7 @@ function resolveTableSpans(table) {
     }
 }
 exports.resolveTableSpans = resolveTableSpans;
-// Maps & Sets
+// Maps
 function pushToMapValue(map, key, newElements) {
     const previous = map.get(key);
     if (previous) {
@@ -78,3 +79,15 @@ function pushToMapValue(map, key, newElements) {
     }
 }
 exports.pushToMapValue = pushToMapValue;
+// JSON files
+async function readJsonFile(filePath) {
+    const contents = await fs_1.promises.readFile(filePath, 'utf8');
+    return JSON.parse(contents);
+}
+exports.readJsonFile = readJsonFile;
+async function writeJsonFile(filePath, contents) {
+    // A line is terminated by a newline character on POSIX-compliant systems.
+    const toWrite = `${JSON.stringify(contents)}\n`;
+    await fs_1.promises.writeFile(filePath, toWrite, 'utf8');
+}
+exports.writeJsonFile = writeJsonFile;
