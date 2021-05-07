@@ -13,7 +13,7 @@ import { HTMLElement } from 'node-html-parser';
  */
 function clone(
   element: HTMLElement,
-  newParent: HTMLElement | undefined
+  newParent: HTMLElement | null
 ): HTMLElement {
   const attributes = element.rawAttributes;
   const rawAttributes = Object.keys(attributes)
@@ -28,20 +28,20 @@ function clone(
 
   const result = new HTMLElement(
     element.tagName,
-    { id: element.id, class: element.classNames.join(' ') },
+    { id: element.id, class: element.classNames },
     rawAttributes,
     newParent
   );
 
   const children = element.childNodes.map((child) => {
     if (child instanceof HTMLElement) {
-      return clone(child, undefined);
+      return clone(child, null);
     }
     return child;
   });
   result.set_content(children); // sets the parentNode of children
 
-  if (newParent !== undefined) {
+  if (newParent !== null) {
     result.parentNode = newParent;
   }
 
@@ -77,7 +77,12 @@ export function resolveTableSpans(table: HTMLElement) {
     const columnIndex = getChildIndex(cell);
 
     let row = cell.parentNode as HTMLElement;
-    for (let i = 1; (row = row.nextElementSibling) !== null && i < span; i++) {
+    for (
+      let i = 1;
+      // TODO Remove cast (https://github.com/taoqf/node-html-parser/pull/118)
+      (row = row.nextElementSibling as HTMLElement) !== null && i < span;
+      i++
+    ) {
       const newCell = clone(cell, row);
       row.childNodes.splice(columnIndex, 0, newCell);
     }

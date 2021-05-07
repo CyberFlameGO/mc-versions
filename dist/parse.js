@@ -95,7 +95,9 @@ function parseVersions(table, edition) {
 }
 function findSectionTableFor(title, edition) {
     let element = title;
-    while ((element = element.nextElementSibling) !== undefined &&
+    while (
+    // TODO Remove cast (https://github.com/taoqf/node-html-parser/pull/118)
+    (element = element.nextElementSibling) !== undefined &&
         element.tagName.toLowerCase() !== 'table')
         ;
     if (element === undefined) {

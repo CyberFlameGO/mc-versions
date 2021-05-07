@@ -23,15 +23,15 @@ function clone(element, newParent) {
         return `${name}=${JSON.stringify(String(val))}`;
     })
         .join(' ');
-    const result = new node_html_parser_1.HTMLElement(element.tagName, { id: element.id, class: element.classNames.join(' ') }, rawAttributes, newParent);
+    const result = new node_html_parser_1.HTMLElement(element.tagName, { id: element.id, class: element.classNames }, rawAttributes, newParent);
     const children = element.childNodes.map((child) => {
         if (child instanceof node_html_parser_1.HTMLElement) {
-            return clone(child, undefined);
+            return clone(child, null);
         }
         return child;
     });
     result.set_content(children); // sets the parentNode of children
-    if (newParent !== undefined) {
+    if (newParent !== null) {
         result.parentNode = newParent;
     }
     return result;
@@ -61,7 +61,9 @@ function resolveTableSpans(table) {
         cell.removeAttribute(ROW_SPAN_ATTR); // resolved
         const columnIndex = getChildIndex(cell);
         let row = cell.parentNode;
-        for (let i = 1; (row = row.nextElementSibling) !== null && i < span; i++) {
+        for (let i = 1; 
+        // TODO Remove cast (https://github.com/taoqf/node-html-parser/pull/118)
+        (row = row.nextElementSibling) !== null && i < span; i++) {
             const newCell = clone(cell, row);
             row.childNodes.splice(columnIndex, 0, newCell);
         }
